@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница для ввода данных</title>
+</head>
+<body>
+<form action="SimplePage.html" method="post">
+    <label for="first-name">Имя: </label>
+    <input type="text" name="FirstName" id="first-name"/>
+
+    <label for="last-name">Фамилия: </label>
+    <input type="text" name="LastName" id="last-name"/>
+
+    <br/>
+    <label>
+        Пол:
+        <input type="radio" name="Gender" value="M">Мужчина
+        <input type="radio" name="Gender" value="F">Женщина
+    </label>
+
+    <label>
+        Возраст
+        <select name="AgeRange">
+            <option value="0">0-20</option>
+            <option value="20">21-50</option>
+            <option value="50">50+</option>
+        </select>
+    </label>
+
+    <br>
+    <label for="about">Коротко о себе</label>
+    <br>
+    <textarea multiple name="About" id="about"></textarea>
+
+    <br>
+    <label>
+        <input type="checkbox" name="Agreement"/>Согласие мелким шрифтом
+    </label>
+
+    <br>
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+</html>
