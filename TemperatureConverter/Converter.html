@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Перевод температур</title>
+    <link href="styles.css" rel="stylesheet"/>
+    <script defer src="script.js"></script>
+</head>
+<body>
+<div class="converter-page">
+    <h1>Перевод температур</h1>
+    <form id="convert-form">
+        <label>Температура в градусах</label>
+        <table id="result-table1" class="result-table">
+            <thead>
+            <tr>
+                <th>Цельсия</th>
+                <th>Кельвина</th>
+                <th>Фаренгейта</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <!--suppress HtmlFormInputWithoutLabel -->
+                    <input type="number" id="celsius-degrees-field" class="number-text" min="-273.15" step="0.01"
+                                                                      value="0" placeholder="Введите значение">
+                </td>
+                <td class="number-text"><span id="kelvin-degrees-text"></span></td>
+                <td class="number-text"><span id="fahrenheit-degrees-text"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+</div>
+</body>
+</html>

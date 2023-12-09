@@ -1,0 +1,21 @@
+*{
+box-sizing: border-box;
+}
+
+.converter-page{
+    margin-left: 10px;
+}
+.converter-page .result-table {
+    margin-top: 10px;
+    border: black 1px solid;
+    border-collapse: collapse;
+}
+
+.converter-page td, th {
+    border: black 1px solid;
+    width :33%
+}
+
+.converter-page .number-text{
+    text-align: right;
+}
