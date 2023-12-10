@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Страница для ввода данных</title>
@@ -8,20 +8,19 @@
 <form action="SimplePage.html" method="post">
     <label for="first-name">Имя: </label>
     <input type="text" name="FirstName" id="first-name"/>
-
     <label for="last-name">Фамилия: </label>
-    <input type="text" name="LastName" id="last-name"/>
+    <input type="text" name="lastName" id="last-name"/>
 
-    <br/>
+    <br>
     <label>
         Пол:
-        <input type="radio" name="Gender" value="M">Мужчина
-        <input type="radio" name="Gender" value="F">Женщина
+        <input type="radio" name="gender" value="M">Мужчина
+        <input type="radio" name="gender" value="F">Женщина
     </label>
 
     <label>
         Возраст
-        <select name="AgeRange">
+        <select name="ageRange">
             <option value="0">0-20</option>
             <option value="20">21-50</option>
             <option value="50">50+</option>
@@ -31,13 +30,24 @@
     <br>
     <label for="about">Коротко о себе</label>
     <br>
-    <textarea multiple name="About" id="about"></textarea>
+    <textarea name="about" id="about"></textarea>
+
+    <br>
+    <label for="ext-data">Отметьте ваши увлечения</label>
+    <div>
+        <select multiple name="extData" id="ext-data">
+            <option>Шахматы</option>
+            <option>Шашки</option>
+            <option>Захват и порабощение мира</option>
+            <option>Чтение</option>
+            <option>Альпинизм</option>
+        </select>
+    </div>
 
     <br>
     <label>
-        <input type="checkbox" name="Agreement"/>Согласие мелким шрифтом
+        <input type="checkbox" name="agreement"/>Согласие мелким шрифтом
     </label>
-
     <br>
     <button type="submit">Сохранить</button>
 </form>
