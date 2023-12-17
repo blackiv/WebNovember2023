@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+}
+
+.add-todo-page .add-todo-form > * {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.add-todo-page .edit-todo-form > * {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.add-todo-page .add-todo-button {
+    margin-left: 5px;
+}
+
+.add-todo-page .error-message {
+    color: red;
+    display: none;
+    font-size: 13px;
+}
+
+.add-todo-page .invalid {
+    border-color: red;
+}
+
+.add-todo-page .invalid + .error-message {
+    display: block;
+}
+
+.add-todo-page .todo-list {
+    padding-left: 0;
+}
+
+.add-todo-page .todo-item + .todo-item {
+    margin-top: 10px;
+}
+
+.add-todo-page .todo-text {
+    display: inline-block;
+    width: 300px;
+}
+
+.add-todo-page .todo-list .edit-button {
+    margin-left: 5px;
+}
+
+.add-todo-page .todo-list .save-button {
+    margin-left: 5px;
+}
+
+.add-todo-page .todo-list .delete-button {
+    margin-left: 5px;
+}
+
+.add-todo-page .todo-list .cancel-button {
+    margin-left: 5px;
+}

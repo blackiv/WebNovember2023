@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="scripts.js"></script>
+</head>
+<body>
+<h1>ToDo List</h1>
+<div class="add-todo-page">
+    <form id="add-todo-form" class="add-todo-form">
+        <div>
+            <!--suppress HtmlFormInputWithoutLabel -->
+            <input type="text" id="add-todo-text-field" class="todo-text" placeholder="Текст заметки">
+            <div class="error-message">Необходимо указать текст</div>
+        </div>
+        <button id="add-todo-button" class="add-todo-button">Добавить</button>
+    </form>
+    <ul id="todo-list" class="todo-list">
+    </ul>
+</div>
+</body>
+</html>
