@@ -1,21 +1,28 @@
-*{
-box-sizing: border-box;
+* {
+    box-sizing: border-box;
 }
 
-.converter-page{
+.converter-page h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.converter-page {
     margin-left: 10px;
 }
+
 .converter-page .result-table {
     margin-top: 10px;
-    border: black 1px solid;
+    border: #000000 1px solid;
     border-collapse: collapse;
 }
 
-.converter-page td, th {
-    border: black 1px solid;
-    width :33%
+.converter-page td, .converter-page th {
+    border: #000000 1px solid;
+    width: 33%;
 }
 
-.converter-page .number-text{
+.converter-page .number-text {
     text-align: right;
 }
