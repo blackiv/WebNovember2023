@@ -14,12 +14,12 @@
 
 .converter-page .result-table {
     margin-top: 10px;
-    border: #000000 1px solid;
+    border: #000 1px solid;
     border-collapse: collapse;
 }
 
 .converter-page td, .converter-page th {
-    border: #000000 1px solid;
+    border: #000 1px solid;
     width: 33%;
 }
 
