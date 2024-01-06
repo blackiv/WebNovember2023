@@ -1,15 +1,14 @@
 (function () {
-    function findCountryWithMaxCitiesCount() {
-        const maxCitiesCount = countries.reduce((maxCities, item) => Math.max(maxCities, item.cities.length), 0);
+    function getCountriesWithMaxCitiesCount(countriesArray) {
+        const maxCitiesCount = countriesArray.reduce((maxCitiesCount, country) => Math.max(maxCitiesCount, country.cities.length), 0);
         return countries
-            .filter(country => country.cities.length === maxCitiesCount)
-            .map(country => country.name);
+            .filter(country => country.cities.length === maxCitiesCount);
     }
 
-    function getPopulationByCountries(){
+    function getPopulationByCountries(countriesArray) {
         const populationByCountries = {};
 
-        countries.forEach(country => {
+        countriesArray.forEach(country => {
             populationByCountries[country.name] = country.cities.reduce((population, city) => population + city.population, 0);
         });
 
@@ -22,13 +21,16 @@
             cities: [
                 {
                     name: "Москва",
-                    population: 12},
+                    population: 12
+                },
                 {
                     name: "Санкт-Петербург",
-                    population: 7},
+                    population: 7
+                },
                 {
                     name: "Новосибирск",
-                    population: 2.5}
+                    population: 2.5
+                }
             ]
         },
         {
@@ -36,10 +38,12 @@
             cities: [
                 {
                     name: "Астана",
-                    population: 1},
+                    population: 1
+                },
                 {
                     name: "Алма-аты",
-                    population: 1.8}
+                    population: 1.8
+                }
             ]
         },
         {
@@ -47,20 +51,23 @@
             cities: [
                 {
                     name: "Пекин",
-                    population: 21.8},
+                    population: 21.8
+                },
                 {
                     name: "Макао",
-                    population: 0.63}
+                    population: 0.63
+                }
             ]
         }
     ];
 
-    console.log(`Страны с максимальным количеством городов [${findCountryWithMaxCitiesCount()}]`);
+    const countriesWithMaxCitiesCount = getCountriesWithMaxCitiesCount(countries);
+    console.log(`Страны с максимальным количеством городов [${countriesWithMaxCitiesCount.map(country => country.name)}]`);
 
     console.log("Информация по странам");
-    const populationByCountries = getPopulationByCountries()
+    const populationByCountries = getPopulationByCountries(countries)
 
-    for (let country in populationByCountries) {
-        console.log(`Население страны ${country} составляет ${populationByCountries[country]}`);
+    for (const countryName in populationByCountries) {
+        console.log(`Население страны ${countryName} составляет ${populationByCountries[countryName]}`);
     }
 })();
