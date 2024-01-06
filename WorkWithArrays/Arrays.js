@@ -1,43 +1,42 @@
-function sortArray(array) {
-    array.sort((number1, number2) => {
-        return number2 - number1;
-    });
-}
-
-function getSubArrays(array, count) {
-    return {
-        first: array.slice(0, count),
-        last: array.slice(-count)
-    };
-}
-
-function getEvenNumbersSum(array) {
-    return array.reduce((currentSum, currentNumber) => {
-        if (currentNumber % 2 === 0) {
-            return currentSum + currentNumber;
-        }
-
-        return currentSum;
-    }, 0);
-}
-
-function createOrderedArray() {
-    const array = Array(100);
-
-    for (let i=1;i<=100;i++){
-        array[i-1] = i;
+(function () {
+    function sortArray(array) {
+        array.sort((number1, number2) => number2 - number1);
     }
 
-    return array;
-}
+    function getFirstElementsSubArray(array, count) {
+        return array.slice(0, count);
+    }
 
-function getEvenNumbersSquaresArray (array){
-    return array
-        .filter(number => number % 2 === 0)
-        .map(number => number * number);
-}
+    function getLastElementsSubArray(array, count) {
+        return array.slice(-count);
+    }
 
-(function () {
+    function getEvenNumbersSum(numbersArray) {
+        return numbersArray.reduce((sum, number) => {
+            if (number % 2 === 0) {
+                return sum + number;
+            }
+
+            return sum;
+        }, 0);
+    }
+
+    function createOrderedNumbersArray() {
+        const array = Array(100);
+
+        for (let i = 1; i <= 100; i++) {
+            array[i - 1] = i;
+        }
+
+        return array;
+    }
+
+    function getEvenNumbersSquares(numbersArray) {
+        return numbersArray
+            .filter(number => number % 2 === 0)
+            .map(number => number * number);
+    }
+
     const array = [7, 12, 3, 5, 4, 29, 22, 89, 45, 44];
     console.log(`Исходный массив [${array}]`);
 
@@ -45,14 +44,13 @@ function getEvenNumbersSquaresArray (array){
     console.log(`Отсортированный по убыванию массив [${array}]`);
 
     const subArrayItemsCount = 5;
-    const subArrays = getSubArrays(array,subArrayItemsCount);
-    console.log(`Подмассив первых ${subArrayItemsCount} элементов [${subArrays.first}]`);
-    console.log(`Подмассив последних ${subArrayItemsCount} элементов [${subArrays.last}]`);
+    console.log(`Подмассив первых ${subArrayItemsCount} элементов [${getFirstElementsSubArray(array, subArrayItemsCount)}]`);
+    console.log(`Подмассив последних ${subArrayItemsCount} элементов [${getLastElementsSubArray(array, subArrayItemsCount)}]`);
 
     console.log(`Сумма четных элементов массива равна ${getEvenNumbersSum(array)}`);
 
-    const orderedArray = createOrderedArray();
+    const orderedArray = createOrderedNumbersArray();
     console.log(`Заполненный массив от 1 до 100 [${orderedArray}]`);
 
-    console.log(`Массив квадратов четных чисел [${getEvenNumbersSquaresArray(orderedArray)}]`);
+    console.log(`Массив квадратов четных чисел [${getEvenNumbersSquares(orderedArray)}]`);
 })();
