@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Телефонная книга</title>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <script defer src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script defer src="node_modules/vue/dist/vue.global.js"></script>
+    <script defer src="script.js"></script>
+</head>
+<body>
+<div id="app" class="container">
+    <h1>Телефонная книга</h1>
+    <div class="row">
+        <form class="row row-cols-lg-auto g-3 align-content-lg-start mb-2" @submit.prevent="refreshTable">
+            <div class="col-12 gx-lg-5">
+                <button type="button" class="btn btn-primary" @click="add">Добавить</button>
+            </div>
+            <div class="col-12 col-lg-8">
+                <div class="row row-cols-auto">
+                    <div class="col-8">
+                        <input type="text" placeholder="Поиск по контактам" class="form-control" v-model="filterString">
+                    </div>
+                    <div class="col gx-1">
+                        <button type="submit" class="btn btn-primary">Поиск</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <table class="table">
+        <thead>
+        <tr class="row">
+            <th class="col"></th>
+            <th class="col-3">Фамилия</th>
+            <th class="col-3">Имя</th>
+            <th class="col-3">Телефон</th>
+            <th class="col"></th>
+        </tr>
+        </thead>
+        <tbody v-cloak>
+        <tr class="row" v-for="(contact,index) in filteredContacts">
+            <!--            <td class="col-auto">-->
+            <!--                <input type="checkbox"/>-->
+            <!--            </td>-->
+            <td class="col-auto" v-text="index+1"></td>
+            <td class="col-3" v-text="contact.family"></td>
+            <td class="col-3" v-text="contact.name"></td>
+            <td class="col-3" v-text="contact.phone"></td>
+            <td class="col">
+                <button type="button" class="btn btn-sm" @click="editContact(contact)">
+                    <img src="img/edit.svg">
+                </button>
+                <button type="button" @click="confirmDelete(contact)" class="btn btn-sm">
+                    <img src="img/delete.svg">
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- Modal -->
+    <modal-delete-confirm ref="confirmDeleteDialog" @ok="deleteContact">
+        <template v-slot:description>
+            Вы действительно хотите удалить запись с номером {{ deletedContact.phone }}?
+        </template>
+    </modal-delete-confirm>
+    <!--    <modal-delete-confirm ref="confirmDeleteCheckedRowsDialog" @ok="deleteRow">-->
+    <!--        <template v-slot:description>-->
+    <!--            Вы действительно хотите удалить {{checkedRows.count}} записей?-->
+    <!--        </template>-->
+    <!--    </modal-delete-confirm>-->
+    <modal-add-or-edit-dialog ref="addOrEditDialog" @ok="onSave">
+        <template v-slot:title>
+            {{ addTitle }}
+        </template>
+    </modal-add-or-edit-dialog>
+</div>
+</body>
+</html>
