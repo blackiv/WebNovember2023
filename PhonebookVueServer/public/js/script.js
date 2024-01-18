@@ -210,7 +210,7 @@ Vue.createApp({
           <div class="modal-body alert-danger alert mb-0">
             <div class="row justify-content-around mb-4 border-bottom border-danger-subtle">
               <div class="col-11">
-                <h1 class="modal-title fs-5">Подтверждение удаления</h1>
+                <h1 class="modal-title fs-5">Ошибка</h1>
               </div>
               <div class="col-1">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

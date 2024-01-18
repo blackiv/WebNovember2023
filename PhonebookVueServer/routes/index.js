@@ -47,7 +47,7 @@ router.post('/api/contacts', function (req, res) {
         return;
     }
 
-    if(contacts.findIndex(storedContact => storedContact.phone === contact.phone)){
+    if (contacts.findIndex(storedContact => storedContact.phone === contact.phone) > -1) {
         res.send({
             success: false,
             message: `Контакт с номером ${contact.phone} уже существует. Запись не добавлена.`
@@ -57,7 +57,7 @@ router.post('/api/contacts', function (req, res) {
     }
 
 
-    if (!contact.id ) {
+    if (!contact.id) {
         id++;
         contact.id = id;
         contacts.push(contact);
