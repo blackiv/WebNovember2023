@@ -1,6 +1,6 @@
 (function () {
-    function sortArray(array) {
-        array.sort((number1, number2) => number2 - number1);
+    function sortArrayDescending(numbers) {
+        numbers.sort((number1, number2) => number2 - number1);
     }
 
     function getFirstElementsSubArray(array, count) {
@@ -40,7 +40,7 @@
     const array = [7, 12, 3, 5, 4, 29, 22, 89, 45, 44];
     console.log(`Исходный массив [${array}]`);
 
-    sortArray(array)
+    sortArrayDescending(array);
     console.log(`Отсортированный по убыванию массив [${array}]`);
 
     const subArrayItemsCount = 5;
