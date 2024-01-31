@@ -1,4 +1,5 @@
 {% extends 'layout.twig' %}
+
 {% block script %}
   <script type="module" defer src="/js/script.js"></script>
 {% endblock %}
@@ -6,12 +7,13 @@
 {% block body %}
 <div id="app" class="container">
     <h1>Телефонная книга</h1>
+
     <div class="row">
-        <form class="row row-cols-lg-auto g-3 align-content-lg-start mb-2" @submit.prevent="refreshTable">
-            <div class="col-12 gx-lg-5">
+        <form class="row row-cols-lg-auto g-3 align-content-lg-start mb-2" @submit.prevent="loadContacts">
+            <div class="gx-lg-5">
                 <button type="button" class="btn btn-primary" @click="showAddDialog">Добавить</button>
             </div>
-            <div class="col-12 col-lg-8">
+            <div class="col-lg-8">
                 <div class="row row-cols-auto">
                     <div class="col-8">
                         <input type="text" placeholder="Поиск по контактам" class="form-control" v-model="filterString">
@@ -23,44 +25,45 @@
             </div>
         </form>
     </div>
-    <table class="table">
-        <thead>
-        <tr class="row">
-            <th class="col"></th>
-            <th class="col-3">Фамилия</th>
-            <th class="col-3">Имя</th>
-            <th class="col-3">Телефон</th>
-            <th class="col"></th>
-        </tr>
-        </thead>
-        <tbody v-cloak>
-        <tr class="row" v-for="(contact,index) in contacts" v-bind:key="contact.id">
-            <!--            <td class="col-auto">-->
-            <!--                <input type="checkbox"/>-->
-            <!--            </td>-->
-            <td class="col-auto" v-text="index+1"></td>
-            <td class="col-3" v-text="contact.family"></td>
-            <td class="col-3" v-text="contact.name"></td>
-            <td class="col-3" v-text="contact.phone"></td>
-            <td class="col">
-                <button type="button" class="btn btn-sm" @click="showEditDialog(contact)">
-                    <img src="images/edit.svg">
-                </button>
-                <button type="button" @click="showDeleteDialog(contact)" class="btn btn-sm">
-                    <img src="images/delete.svg">
-                </button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-striped align-middle text-center">
+            <thead>
+            <tr>
+                <th scope="col" class=></th>
+                <th scope="col">Фамилия</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Телефон</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody v-cloak>
+            <tr scope="row" v-for="(contact,index) in contacts" :key="contact.id">
+                <td scope="col"  v-text="index+1"></td>
+                <td scope="col" v-text="contact.family"></td>
+                <td scope="col" v-text="contact.name"></td>
+                <td scope="col" v-text="contact.phone"></td>
+                <td scope="col">
+                    <button type="button" class="btn btn-sm" @click="showEditDialog(contact)" title="Редактировать">
+                        <img src="images/edit.svg">
+                    </button>
+                    <button type="button" @click="showDeleteDialog(contact)" class="btn btn-sm" title="Удалить">
+                        <img src="images/delete.svg">
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
     <!-- Modal -->
-    <modal-delete-confirm ref="confirmDeleteDialog" @ok="deleteContact">
+    <modal-delete-confirm ref="confirmDeleteDialog" @ok="confirmDeleteDialog">
         <template v-slot:description>
             {% verbatim %}
                 Вы действительно хотите удалить запись с номером {{ deletedContact.phone }}?
             {% endverbatim %}
         </template>
     </modal-delete-confirm>
+
     <modal-add-or-edit-dialog ref="addOrEditDialog" @ok="onEditDialogSave">
         <template v-slot:title>
             {% verbatim %}
@@ -68,6 +71,8 @@
              {% endverbatim %}
         </template>
     </modal-add-or-edit-dialog>
-    <modal-error-dialog ref="errorDialog"></modal-error-dialog>
+
+    <modal-error-dialog ref="errorDialog">
+    </modal-error-dialog>
 </div>
 {% endblock %}

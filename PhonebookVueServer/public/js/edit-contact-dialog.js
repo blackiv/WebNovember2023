@@ -11,16 +11,15 @@ export default {
           </div>
           <div class="modal-body">
             <form ref="addForm" class="row row-cols-lg-auto g-3 needs-validation"
-                  v-bind:class="{'was-validated' : validated}" novalidate @submit.prevent="save">
-              <div class="col-12 col-lg-4">
+                  :class="{'was-validated': validated}" novalidate @submit.prevent="save">
+              <div class="col-lg-4">
                 <input type="text" class="form-control" placeholder="Фамилия" v-model="contact.family" required>
               </div>
-              <div class="col-12 col-lg-4">
+              <div class="col-lg-4">
                 <input type="text" class="form-control" placeholder="Имя" v-model="contact.name" required>
               </div>
-              <div class="col-12 col-lg-4">
-                <input type="text" class="form-control" placeholder="Телефон" v-model="contact.phone"
-                       @input="phoneInput" required>
+              <div class="col-lg-4">
+                <input type="text" class="form-control" placeholder="Телефон" v-model="contact.phone" required>
               </div>
               <button style="display: none" type="submit"></button>
             </form>
@@ -32,6 +31,7 @@ export default {
         </div>
       </div>
       </div>`,
+
     data() {
         return {
             dialog: null,
@@ -44,32 +44,44 @@ export default {
             validated: false
         }
     },
+
     mounted() {
         this.dialog = new bootstrap.Modal(this.$refs.modalEditDialog, {});
     },
+
+    watch: {
+        "contact.phone": function (newPhone) {
+            this.contact.phone = newPhone.replace(/\D/g, '');
+        }
+    },
+
     methods: {
-        show() {
+        show(contact) {
+            if (contact === undefined) {
+                this.contact = {
+                    family: "",
+                    name: "",
+                    phone: "",
+                    id: 0
+                };
+            } else {
+                this.contact = contact;
+            }
+
+            this.validated = false;
             this.dialog.show();
         },
+
+        hide() {
+            this.dialog.hide();
+        },
+
         save() {
             if (!this.$refs.addForm.checkValidity()) {
                 this.validated = true;
                 return;
             }
-            this.dialog.hide();
             this.$emit("ok", this.contact);
-        },
-        phoneInput(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        },
-        newContact() {
-            this.contact = {
-                family: "",
-                name: "",
-                phone: "",
-                id: 0
-            };
-            this.validated = false;
         }
     }
 }

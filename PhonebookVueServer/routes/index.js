@@ -6,31 +6,36 @@ const contacts = [];
 let id = contacts.length; /*на случай если загружен сразу*/
 
 /* GET home page. */
-router.get('/', function (req, res) {
-    res.render('index', {title: 'Телефонная книга'});
+router.get('/', function (req, response) {
+    response.render('index', {title: 'Телефонная книга'});
 });
 
-router.get('/api/contacts', function (req, res) {
-    const filterString = (req.query.filterString || "").toUpperCase();
+router.get('/api/contacts', function (req, response) {
+    const filterString = (req.query.filterString || '').toUpperCase();
+
+    if (filterString === '') {
+        response.send(contacts);
+        return;
+    }
+
     const result = contacts.filter(contact => contact.phone.includes(filterString) || contact.family.toUpperCase().includes(filterString) || contact.name.toUpperCase().includes(filterString));
-    res.send(result);
+    response.send(result);
 });
 
-router.post('/api/contacts', function (req, res) {
+router.post('/api/contacts', function (req, response) {
     const contact = req.body;
 
     if (!contact.family) {
-        res.send({
+        response.send({
             success: false,
-            message: 'Не заполнено поле "Фамилия"',
-            contact: contact
+            message: 'Не заполнено поле "Фамилия"'
         });
 
         return;
     }
 
     if (!contact.name) {
-        res.send({
+        response.send({
             success: false,
             message: 'Не заполнено поле "Имя"'
         });
@@ -39,7 +44,7 @@ router.post('/api/contacts', function (req, res) {
     }
 
     if (!contact.phone) {
-        res.send({
+        response.send({
             success: false,
             message: 'Не заполнено поле "Телефон"'
         });
@@ -47,8 +52,8 @@ router.post('/api/contacts', function (req, res) {
         return;
     }
 
-    if (contacts.findIndex(storedContact => storedContact.phone === contact.phone) > -1) {
-        res.send({
+    if (!contact.id && (contacts.findIndex(storedContact => storedContact.phone === contact.phone) > -1)) {
+        response.send({
             success: false,
             message: `Контакт с номером ${contact.phone} уже существует. Запись не добавлена.`
         });
@@ -56,44 +61,44 @@ router.post('/api/contacts', function (req, res) {
         return;
     }
 
-
     if (!contact.id) {
         id++;
         contact.id = id;
         contacts.push(contact);
-    } else {
-        const editIndex = contacts.findIndex(storedContact => storedContact.id === contact.id);
-        if (editIndex !== -1) {
-            contacts[editIndex] = contact;
-        } else {
-            res.send({
-                success: false,
-                message: 'Контакт не найден',
-                contact: contact
-            });
 
-            return;
-        }
+        response.send({success: true, message: null});
+        return;
     }
 
-    res.send({success: true, message: null});
+    const editIndex = contacts.findIndex(storedContact => storedContact.id === contact.id);
+    if (editIndex !== -1) {
+        contacts[editIndex] = contact;
+        response.send({success: true, message: null});
+        return;
+    }
+
+    response.send({
+        success: false,
+        message: 'Контакт не найден'
+    });
 });
 
-router.delete('/api/contacts/:id', function (req, res) {
-    const deletedId = Number(req.params.id)
+router.delete('/api/contacts/:id', function (req, response) {
+    const deletedId = Number(req.params.id);
     const deletedIndex = contacts.findIndex(storedContact => storedContact.id === deletedId);
+
     if (deletedIndex !== -1) {
         contacts.splice(deletedIndex, 1);
     } else {
-        res.send({
+        response.send({
             success: false,
-            message: 'Контакт не найден',
+            message: 'Контакт не найден'
         });
 
         return;
     }
 
-    res.send({success: true, message: null});
+    response.send({success: true, message: null});
 });
 
 module.exports = router;

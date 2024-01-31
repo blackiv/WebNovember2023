@@ -17,20 +17,27 @@ export default {
         </div>
       </div>
       </div>`,
+
     data() {
         return {
             dialog: null
         };
     },
+
     mounted() {
         this.dialog = new bootstrap.Modal(this.$refs.modalDeleteConfirmationDialog, {});
     },
+
     methods: {
         show() {
             this.dialog.show();
         },
-        onOk() {
+
+        hide() {
             this.dialog.hide();
+        },
+
+        onOk() {
             this.$emit("ok");
         }
     }

@@ -17,14 +17,17 @@ export default {
         </div>
       </div>
       </div>`,
+
     data() {
         return {
             errorMessage: ""
         };
     },
+
     mounted() {
         this.dialog = new bootstrap.Modal(this.$refs.modalErrorDialog, {});
     },
+
     methods: {
         show(message) {
             this.errorMessage = message;
